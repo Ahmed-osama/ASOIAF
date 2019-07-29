@@ -11,14 +11,6 @@
     "/_error": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/character/[slug]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/house/[name]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }
