@@ -2,19 +2,19 @@ import { Layout } from "../components/Layout/Layout";
 
 import { getAllHouses } from "../client";
 import { HouseListItem } from "../components/HouseListItem";
-
+import { Card, Row } from "../elements";
+const CardUl = Card("ul");
 const Home = ({ houses }) => (
-    <Layout>
+  <Layout>
+    <CardUl padding={0}>
       {houses &&
         houses.length &&
-        houses.map(({ name, id }) => (
-          <section key={id + name}>
-            <HouseListItem name={name} />
-          </section>
+        houses.map(({ name, id }, i) => (
+          <HouseListItem key={`${id}-${i}`} name={name} />
         ))}
-    </Layout>
-  );
-
+    </CardUl>
+  </Layout>
+);
 
 Home.getInitialProps = async () => {
   const houses = await getAllHouses();

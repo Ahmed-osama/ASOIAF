@@ -1,4 +1,6 @@
 import Link from "next/link";
+import styled from "styled-components";
+import { BorderedList } from "../../elements";
 
 export const HouseListItem = ({
   id,
@@ -10,9 +12,7 @@ export const HouseListItem = ({
   words,
   slug
 }) => (
-  <section>
-    <Link href="/house/[name]" as={`/house/${name}`}>
-      <a>{name}</a>
-    </Link>
-  </section>
+  <Link href="/house/[name]" as={`/house/${name}`}>
+    <BorderedList>{name}</BorderedList>
+  </Link>
 );
