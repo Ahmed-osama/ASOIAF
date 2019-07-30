@@ -13,6 +13,7 @@ const AppHeader = styled.header`
   width: 100%;
   top: 0;
   left: 0;
+  z-index: 10;
 `;
 
 const Logo = styled.div`

@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export const Character = ({ slug, name }) => (
+export const CharacterLink = ({ slug, children }) => (
   <>
     <Link href="/character/[slug]" as={`/character/${slug}`}>
-      <a>{name}</a>
+      {children}
     </Link>
   </>
 );

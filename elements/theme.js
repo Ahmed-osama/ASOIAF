@@ -5,6 +5,7 @@ export default {
     warm: `#E76822`,
     light: `#FFFFFF`,
     cool: `#0068A0`,
+    green: `#16a177`,
     dark: `#262324`
   },
   get primary() {
@@ -12,6 +13,12 @@ export default {
   },
   get secondary() {
     return this.colors.cool;
+  },
+  get sub() {
+    return this.colors.warm;
+  },
+  get sucess() {
+    return this.colors.green;
   },
   get border() {
     return this.colors.divider;

@@ -2,11 +2,22 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Layout } from "../../components/Layout/Layout";
 import { getHouseCharacters, getHouseByName } from "../../client";
-import { Character } from "../../components/Character";
-import { Row, Col, PageSection, Label } from "../../elements";
+
+import {
+  Row,
+  Col,
+  PageSection,
+  Label,
+  Qoute,
+  SectionTitle,
+  PageTitle
+} from "../../elements";
 import CharacterCard from "../../elements/CharacterCard";
 
-const House = ({ houseDetails, houseCharacters }) => {
+const House = ({ houseDetails, houseCharacters, redirect }) => {
+  if (redirect) {
+    Router.replace("/", { shallow: true });
+  }
   const {
     houseId: id,
     seat,
@@ -24,23 +35,28 @@ const House = ({ houseDetails, houseCharacters }) => {
       <Row>
         <Col cols={4}>
           {logoURL && <img src={logoURL} width="100%" />}
-          <p>{sigil}</p>
+          <p style={{ textAlign: "center" }}>{sigil}</p>
         </Col>
         <Col cols={8}>
           <PageSection>
-            <h1>{name}</h1>
+            <PageTitle>{name}</PageTitle>
           </PageSection>
           <PageSection>
-            {words && <blockquote>{words}</blockquote>}
-            {seat && (
+            {words && <Qoute>{words}</Qoute>}
+            {seat.length > 0 && (
               <p>
-                <strong>seat :</strong> {seat}
+                <strong>seat :</strong>
+                {seat.map(s => (
+                  <Label color={"sub"} key={s}>
+                    {s}
+                  </Label>
+                ))}
               </p>
             )}
 
             {allegiance.length > 0 && (
               <p>
-                <strong>Alliance : </strong>{" "}
+                <strong>Alliance : </strong>
                 {allegiance.map(ally => (
                   <Link href="/house/[ally]" as={`/house/${ally}`} key={ally}>
                     <Label>{ally}</Label>
@@ -50,9 +66,11 @@ const House = ({ houseDetails, houseCharacters }) => {
             )}
             {religion.length > 0 && (
               <p>
-                <strong>Religions : </strong>{" "}
+                <strong>Religions : </strong>
                 {religion.map(relig => (
-                  <span key={relig}>{relig}, </span>
+                  <Label key={relig} color={"sucess"}>
+                    {relig}
+                  </Label>
                 ))}
               </p>
             )}
@@ -60,7 +78,7 @@ const House = ({ houseDetails, houseCharacters }) => {
           <PageSection>
             {houseCharacters.length > 0 && (
               <>
-                <h2>characters</h2>
+                <SectionTitle>characters</SectionTitle>
                 <Row>
                   {houseCharacters.map(char => (
                     <Col key={char.id} cols={6}>
@@ -78,12 +96,18 @@ const House = ({ houseDetails, houseCharacters }) => {
 };
 
 House.getInitialProps = async function(context) {
-  const { name } = context.query;
-  const houseDetails = await getHouseByName(name);
-  const houseCharacters = await getHouseCharacters(name);
-  return {
-    houseDetails,
-    houseCharacters
-  };
+  try {
+    const { name } = context.query;
+    const houseDetails = await getHouseByName(name);
+    const houseCharacters = await getHouseCharacters(name);
+    return {
+      houseDetails,
+      houseCharacters
+    };
+  } catch {
+    return {
+      redirect: true
+    };
+  }
 };
 export default House;

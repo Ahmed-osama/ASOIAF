@@ -1,4 +1,5 @@
 import styled, { css, createGlobalStyle } from "styled-components";
+import { lighten } from "polished";
 
 export const GlobalStyle = createGlobalStyle`
  @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
@@ -74,6 +75,18 @@ export const PageSection = styled.section`
     border-top: 3px solid #dfdfdf;
   }
 `;
+export const SectionTitle = styled.h4`
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-transform: capitalize;
+`;
+export const PageTitle = styled.h4`
+  font-size: 32px;
+  font-weight: 700;
+  margin: 15px 0;
+  text-transform: capitalize;
+`;
 
 export const Row = styled.div`
   display: flex;
@@ -89,18 +102,33 @@ export const Col = styled.div`
   max-width: ${props => (props.cols / 12) * 100}%;
 `;
 
-export const Label = styled.a`
+export const Label = styled.a.attrs(props => ({
+  color: props.theme[props.color || "secondary"] || props.theme.secondary
+}))`
   padding: 0 10px;
   height: 30px;
   font-size: 12px;
   border-radius: 3px;
-  border: 1px solid ${props => props.theme.secondary};
-  color: ${props => props.theme.secondary};
+  border: 1px solid ${props => props.color};
+  color: ${props => props.color};
   display: inline-flex;
   justify-content: center;
   align-items: center;
   margin: 5px;
-  background: #d3effe;
+  background: ${props => lighten(0.59, props.color)};
   cursor: pointer;
   text-decoration: none;
+  &:hover {
+    color: ${props => props.theme.colors.light};
+    background: ${props => props.color};
+  }
+`;
+
+export const Qoute = styled.blockquote`
+  border-radius: 2px;
+  background: ${props => lighten(0.05, props.theme.border)};
+  padding: 15px;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0 0 15px 0;
 `;
