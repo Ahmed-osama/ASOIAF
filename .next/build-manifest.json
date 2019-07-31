@@ -16,7 +16,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/house/[name]": [
+    "/character/[slug]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
