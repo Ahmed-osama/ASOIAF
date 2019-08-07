@@ -10,7 +10,7 @@ export const getAllCharacters = async function() {
   const formattedData = await data.map(char => new Character(char));
   return formattedData;
 };
-export const getCharacterBySlug = async function(slug) {
+export const getCharacterBySlug = async function(slug: string) {
   var url = apiUrl + "book/characters/bySlug/" + slug;
   const res = await fetch(url);
   const data = await res.json();
