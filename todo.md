@@ -5,6 +5,7 @@
 - bind data to componenets using hooks
 - use error boundries compoent
 - report errors using [sintry](https://sentry.io/onboarding/tajawal-dd/get-started/)
+- use type script
 - create filtering methods
 - use normalizer
 - revisit archtecture
