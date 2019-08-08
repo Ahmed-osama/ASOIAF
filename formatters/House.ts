@@ -1,7 +1,16 @@
 import _get from "lodash/get";
 
 export class House {
-  constructor(house) {
+  id?: string;
+  seat?: string[];
+  allegiance?: string[];
+  region?: string[];
+  religion?: string[];
+  name?: string;
+  words?: string;
+  sigil?: string;
+  logoURL?: string;
+  constructor(house: object) {
     this.id = _get(house, "id", "");
     this.seat = _get(house, "seat", []);
     this.allegiance = _get(house, "allegiance", []);

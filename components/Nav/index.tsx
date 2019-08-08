@@ -29,7 +29,7 @@ const NavItem = styled.a`
 `;
 export const Nav = props => (
   <HeaderNav>
-    {paths.map(({ name, path }) => (
+    {paths.map(({ name, path }: { name: string; path: string }) => (
       <Link key={name} href={path}>
         <NavItem>{name}</NavItem>
       </Link>

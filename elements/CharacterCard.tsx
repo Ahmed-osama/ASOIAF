@@ -53,14 +53,14 @@ const Pointer = styled.a`
 `;
 
 const NormalCard = Card("div");
-export default props => {
+const CharacterCard = props => {
   return (
     <NormalCard mb={30}>
       <CharacterLink {...props}>
         <Pointer>
           <ColumnFlex>
             <AvatarContainer>
-              <Avatar src={props.image || anonymous} />
+              <Avatar src={props.image} />
             </AvatarContainer>
             <CharName>{props.name}</CharName>
           </ColumnFlex>
@@ -69,3 +69,7 @@ export default props => {
     </NormalCard>
   );
 };
+CharacterCard.defaultProps = {
+  image: anonymous
+};
+export default CharacterCard;
