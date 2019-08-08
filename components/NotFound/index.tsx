@@ -22,28 +22,26 @@ const NotFound: FunctionComponent<NotFoundProps> = ({
   link,
   linkName
 }) => (
-  <Layout>
-    <NotFoundWraper>
-      <Row>
-        <Col cols={12} center>
-          <img
-            src={"http://www.pngmart.com/files/8/Jon-Snow-PNG-HD-Quality.png"}
-            alt="Not Found"
-          />
-        </Col>
-        <Col cols={12} center>
-          <h2>
-            {type} <strong> {name}</strong> is not found
-          </h2>
-        </Col>
-        <Col cols={12} center>
-          <Link href={link}>
-            <Btn>{linkName}</Btn>
-          </Link>
-        </Col>
-      </Row>
-    </NotFoundWraper>
-  </Layout>
+  <NotFoundWraper>
+    <Row>
+      <Col cols={12} center>
+        <img
+          src={"http://www.pngmart.com/files/8/Jon-Snow-PNG-HD-Quality.png"}
+          alt="Not Found"
+        />
+      </Col>
+      <Col cols={12} center>
+        <h2>
+          {type} <strong> {name}</strong> is not found
+        </h2>
+      </Col>
+      <Col cols={12} center>
+        <Link href={link}>
+          <Btn>{linkName}</Btn>
+        </Link>
+      </Col>
+    </Row>
+  </NotFoundWraper>
 );
 
 NotFound.defaultProps = {
