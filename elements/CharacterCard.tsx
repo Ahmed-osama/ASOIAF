@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from ".";
+import { Card } from "./index";
 import { CharacterLink } from "../components/CharacterLink";
 const anonymous = `https://themerkle.com/wp-content/uploads/2017/02/shutterstock_153830195.jpg`;
 const CharName = styled.h4`

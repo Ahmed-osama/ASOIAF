@@ -1,7 +1,7 @@
 import _get from "lodash/get";
 
 export class Character {
-  id?: string;
+  id: any;
   gender?: string;
   titles?: string[];
   name?: string;
@@ -9,15 +9,15 @@ export class Character {
   slug?: string;
   image?: string;
   alive?: string;
-  spouse?: string;
+  spouse?: string[];
   placeOfDeath?: string;
   culture?: string;
-  death?: string;
-  birth?: string;
+  death?: number;
+  birth?: number;
   children?: string[];
   pagerank?: string[];
   house?: string[];
-  constructor(char) {
+  constructor(char: object) {
     this.id = _get(char, "id", "");
     this.gender = _get(char, "gender", "");
     this.titles = _get(char, "titles", []);

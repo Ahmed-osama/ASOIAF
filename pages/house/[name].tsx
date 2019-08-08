@@ -10,16 +10,22 @@ import {
   Label,
   Qoute,
   SectionTitle,
-  PageTitle
+  PageTitle,
+  Btn
 } from "../../elements";
 import CharacterCard from "../../elements/CharacterCard";
-
-const House = ({ houseDetails, houseCharacters, redirect }) => {
-  if (redirect) {
-    Router.replace("/", { shallow: true });
-  }
+import { Character } from "../../formatters/character";
+import { House as HouseClass } from "../../formatters/House";
+import Page from "../../types/page";
+import Router from "next/router";
+import { redirect } from "../../utils";
+interface HouseProps {
+  houseDetails?: HouseClass;
+  houseCharacters?: Character[];
+}
+const House: Page<HouseProps> = ({ houseDetails, houseCharacters }) => {
   const {
-    houseId: id,
+    id,
     seat,
     allegiance,
     region,
@@ -95,9 +101,9 @@ const House = ({ houseDetails, houseCharacters, redirect }) => {
   );
 };
 
-House.getInitialProps = async function(context) {
+House.getInitialProps = async function({ res, query }) {
+  const { name } = query;
   try {
-    const { name } = context.query;
     const houseDetails = await getHouseByName(name);
     const houseCharacters = await getHouseCharacters(name);
     return {
@@ -105,9 +111,8 @@ House.getInitialProps = async function(context) {
       houseCharacters
     };
   } catch {
-    return {
-      redirect: true
-    };
+    const to = `/404?type=house&name=${name}`;
+    redirect(to, process, Router, res);
   }
 };
 export default House;

@@ -4,7 +4,11 @@ import Link from "next/link";
 import { Row, Col, PageSection, Label, PageTitle } from "../../elements";
 import { CharacterLink } from "../../components/CharacterLink";
 import Router from "next/router";
-const CharacterPage = ({
+import Page from "../../types/page";
+import { Character } from "../../formatters/character";
+import { redirect } from "../../utils";
+
+const CharacterPage: Page<Character> = ({
   id,
   gender,
   titles,
@@ -20,92 +24,81 @@ const CharacterPage = ({
   pagerank,
   house,
   culture,
-  birth,
-  redirect
+  birth
 }) => {
-  if (redirect) {
-    Router.push("/");
-  }
   const subject = ["male", ""].some(gen => gen === gender) ? "he" : "she";
   return (
     <>
-      {!redirect && (
-        <Layout>
-          <Row>
-            <Col cols={4}>{image && <img src={image} />}</Col>
-            <Col cols={8}>
-              <PageSection>
-                <PageTitle>
-                  {titles[0]} {name} Of{" "}
-                  <Link href="/house/[name]" as={`/house/${house}`}>
-                    <a>{house}</a>
-                  </Link>
-                </PageTitle>
-              </PageSection>
-              <PageSection>
-                {gender && (
-                  <p>
-                    {subject} is {gender}
-                  </p>
-                )}
+      <Layout>
+        <Row>
+          <Col cols={4}>{image && <img src={image} />}</Col>
+          <Col cols={8}>
+            <PageSection>
+              <PageTitle>
+                {titles[0]} {name} Of{" "}
+                <Link href="/house/[name]" as={`/house/${house}`}>
+                  <a>{house}</a>
+                </Link>
+              </PageTitle>
+            </PageSection>
+            <PageSection>
+              {gender && (
                 <p>
-                  {subject} was born in {Math.abs(birth)}{" "}
-                  {birth > 0 ? "A.C" : "B.C"}
+                  {subject} is {gender}
                 </p>
-                {culture && (
-                  <p>
-                    {subject} is {culture}
-                  </p>
-                )}
+              )}
+              <p>
+                {subject} was born in {Math.abs(birth)}{" "}
+                {birth > 0 ? "A.C" : "B.C"}
+              </p>
+              {culture && (
                 <p>
-                  {alive ? `${subject} still alive` : `${subject} passed away`}{" "}
+                  {subject} is {culture}
                 </p>
-                {placeOfDeath && (
-                  <p>
-                    {subject} died in {placeOfDeath} on {death}
-                  </p>
-                )}
-                {death && birth && (
-                  <p>
-                    {subject} lived for {death - birth} years
-                  </p>
-                )}
-                {spouse.length > 0 && (
-                  <p>
-                    {subject} {alive ? "is" : "was"} married to{" "}
-                    {spouse.map(spous => `${spous}, `)}
-                  </p>
-                )}
-                {children.length > 0 && (
-                  <p>
-                    {subject} has {children.length} children :
-                    {children.map(child => (
-                      <CharacterLink
-                        key={child}
-                        slug={child.replace(/ /g, "_")}
-                      >
-                        <Label color={"primary"}>{child}</Label>
-                      </CharacterLink>
-                    ))}
-                  </p>
-                )}
-              </PageSection>
-            </Col>
-          </Row>
-        </Layout>
-      )}
+              )}
+              <p>
+                {alive ? `${subject} still alive` : `${subject} passed away`}{" "}
+              </p>
+              {placeOfDeath && (
+                <p>
+                  {subject} died in {placeOfDeath} on {death}
+                </p>
+              )}
+              {death && birth && (
+                <p>
+                  {subject} lived for {death - birth} years
+                </p>
+              )}
+              {spouse.length > 0 && (
+                <p>
+                  {subject} {alive ? "is" : "was"} married to{" "}
+                  {spouse.map(spous => `${spous}, `)}
+                </p>
+              )}
+              {children.length > 0 && (
+                <p>
+                  {subject} has {children.length} children :
+                  {children.map(child => (
+                    <CharacterLink key={child} slug={child.replace(/ /g, "_")}>
+                      <Label color={"primary"}>{child}</Label>
+                    </CharacterLink>
+                  ))}
+                </p>
+              )}
+            </PageSection>
+          </Col>
+        </Row>
+      </Layout>
     </>
   );
 };
-CharacterPage.getInitialProps = async function(context) {
+CharacterPage.getInitialProps = async function({ query, res }) {
+  const { slug } = query;
   try {
-    const { slug } = context.query;
     const character = await getCharacterBySlug(slug);
     return character;
   } catch {
-    return {
-      redirect: true
-    };
+    redirect(`/404?type=character&name=${slug}`, process, Router, res);
   }
 };
 export default CharacterPage;

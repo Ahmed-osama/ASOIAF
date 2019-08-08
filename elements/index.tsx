@@ -1,6 +1,6 @@
 import styled, { css, createGlobalStyle } from "styled-components";
 import { lighten } from "polished";
-
+import theme from "./theme";
 export const GlobalStyle = createGlobalStyle`
  @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
   *{
@@ -100,10 +100,16 @@ export const Col = styled.div`
   padding: 0 15px;
   flex-basis: ${props => (props.cols / 12) * 100}%;
   max-width: ${props => (props.cols / 12) * 100}%;
+  ${props =>
+    props.center &&
+    css`
+      justify-content: center;
+      display: flex;
+    `}
 `;
 
 export const Label = styled.a.attrs(props => ({
-  color: props.theme[props.color || "secondary"] || props.theme.secondary
+  color: props.theme[props.color]
 }))`
   padding: 0 10px;
   height: 30px;
@@ -123,7 +129,9 @@ export const Label = styled.a.attrs(props => ({
     background: ${props => props.color};
   }
 `;
-
+Label.defaultProps = {
+  color: "secondary"
+};
 export const Qoute = styled.blockquote`
   border-radius: 2px;
   background: ${props => lighten(0.05, props.theme.border)};
@@ -132,3 +140,22 @@ export const Qoute = styled.blockquote`
   font-size: 18px;
   margin: 0 0 15px 0;
 `;
+
+export const Btn = styled.a`
+  display: inline-flex;
+  padding: ${({ theme: { space } }) => `0 ${space}px`};
+  height: 35px;
+  background: ${({ theme, color }) => theme[color]};
+  color: ${({ theme }) => theme.colors.light};
+  border-radius: 2px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  &:hover {
+    background: ${({ theme: { secondary } }) => secondary};
+    color: ${({ theme }) => theme.colors.light};
+  }
+`;
+Btn.defaultProps = {
+  color: "primary"
+};

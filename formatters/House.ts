@@ -1,7 +1,7 @@
 import _get from "lodash/get";
 
 export class House {
-  id?: string;
+  id: any;
   seat?: string[];
   allegiance?: string[];
   region?: string[];

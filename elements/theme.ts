@@ -8,6 +8,7 @@ export default {
     green: `#16a177`,
     dark: `#262324`
   },
+  space: 15,
   get primary() {
     return this.colors.dark;
   },
