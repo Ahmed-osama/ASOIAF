@@ -1,7 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import { Character } from "../formatters/character";
 import { House } from "../formatters/House";
-import _isEmpty from "lodash/isempty";
+import _isEmpty from "lodash/isEmpty";
 const apiUrl = "https://api.got.show/api/";
 const handleNoData = data => {
   if (_isEmpty(data)) {
