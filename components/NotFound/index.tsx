@@ -25,10 +25,7 @@ const NotFound: FunctionComponent<NotFoundProps> = ({
   <NotFoundWraper>
     <Row>
       <Col cols={12} center>
-        <img
-          src={"http://www.pngmart.com/files/8/Jon-Snow-PNG-HD-Quality.png"}
-          alt="Not Found"
-        />
+        <img src={"static/404.png"} alt="Not Found" />
       </Col>
       <Col cols={12} center>
         <h2>

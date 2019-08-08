@@ -19,6 +19,6 @@ export class House {
     this.name = _get(house, "name", "");
     this.words = _get(house, "words", "");
     this.sigil = _get(house, "sigil", "");
-    this.logoURL = _get(house, "logoURL", "");
+    this.logoURL = _get(house, "logoURL", "/static/house-placeholder.png");
   }
 }

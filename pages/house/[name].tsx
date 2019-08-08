@@ -19,6 +19,7 @@ import { House as HouseClass } from "../../formatters/House";
 import Page from "../../types/page";
 import Router from "next/router";
 import { redirect } from "../../utils";
+
 interface HouseProps {
   houseDetails?: HouseClass;
   houseCharacters?: Character[];
