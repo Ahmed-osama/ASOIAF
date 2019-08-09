@@ -1,16 +1,6 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
-
-const paths = [
-  {
-    name: "characters",
-    path: "/"
-  },
-  {
-    name: "houses",
-    path: "/"
-  }
-];
+import { paths } from "../../constants";
 
 const HeaderNav = styled.nav`
   display: flex;

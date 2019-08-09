@@ -2,8 +2,10 @@ import fetch from "isomorphic-unfetch";
 import { Character } from "../formatters/character";
 import { House } from "../formatters/House";
 import _isEmpty from "lodash/isEmpty";
-const apiUrl = "https://api.got.show/api/";
+import { apiUrl } from "../constants";
+
 const handleNoData = data => {
+  console.log(`_isEmpty(data)`, _isEmpty(data));
   if (_isEmpty(data)) {
     throw new Error("no Data found");
   }
@@ -15,6 +17,13 @@ export const getAllCharacters = async function() {
   handleNoData(data);
   const formattedData = await data.map(char => new Character(char));
   return formattedData;
+};
+export const getAllBastards = async function() {
+  var url = apiUrl + "show/bastards";
+  const res = await fetch(url);
+  const data = await res.json();
+  handleNoData(data);
+  return data;
 };
 export const getCharacterBySlug = async function(slug: string) {
   var url = apiUrl + "book/characters/bySlug/" + slug;
@@ -28,7 +37,6 @@ export const getAllHouses = async function() {
   const res = await fetch(url);
   const data = await res.json();
   handleNoData(data);
-
   const formattedData = await data.map(house => new House(house));
   return formattedData;
 };

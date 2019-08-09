@@ -24,7 +24,7 @@ export class Character {
     this.name = _get(char, "name", "");
     this.allegiance = _get(char, "allegiance", []);
     this.slug = _get(char, "slug", "");
-    this.image = _get(char, "image", "");
+    this.image = _get(char, "image", undefined);
     this.alive = _get(char, "alive", "");
     this.spouse = _get(char, "spouse", "");
     this.placeOfDeath = _get(char, "placeOfDeath", "");

@@ -3803,40 +3803,6 @@ exports["default"] = mitt;
 
 /***/ }),
 
-/***/ "./node_modules/next-server/dist/lib/request-context.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/next-server/dist/lib/request-context.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
-
-var _defineProperty = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"));
-
-var __importStar = void 0 && (void 0).__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-  }
-  result["default"] = mod;
-  return result;
-};
-
-(0, _defineProperty["default"])(exports, "__esModule", {
-  value: true
-});
-
-var React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-exports.RequestContext = React.createContext(null);
-
-/***/ }),
-
 /***/ "./node_modules/next-server/dist/lib/router-context.js":
 /*!*************************************************************!*\
   !*** ./node_modules/next-server/dist/lib/router-context.js ***!
@@ -3980,6 +3946,7 @@ function () {
     var initialProps = _ref.initialProps,
         pageLoader = _ref.pageLoader,
         App = _ref.App,
+        wrapApp = _ref.wrapApp,
         Component = _ref.Component,
         err = _ref.err,
         subscription = _ref.subscription;
@@ -4061,6 +4028,7 @@ function () {
     this.asPath = as;
     this.sub = subscription;
     this.clc = null;
+    this._wrapApp = wrapApp;
 
     if (true) {
       // in order for `e.state` to work on the `onpopstate` event
@@ -4568,6 +4536,7 @@ function () {
                 App = this.components['/_app'].Component;
                 _context2.next = 6;
                 return utils_1.loadGetInitialProps(App, {
+                  AppTree: this._wrapApp(App),
                   Component: Component,
                   router: this,
                   ctx: ctx
@@ -4961,7 +4930,6 @@ var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/help
 
 exports.__esModule = true;
 exports.useRouter = useRouter;
-exports.useRequest = useRequest;
 exports.makePublicRouterInstance = makePublicRouterInstance;
 exports.createRouter = exports.withRouter = exports["default"] = void 0;
 
@@ -4977,8 +4945,6 @@ exports.Router = _router2["default"];
 exports.NextRouter = _router2.NextRouter;
 
 var _routerContext = __webpack_require__(/*! next-server/dist/lib/router-context */ "./node_modules/next-server/dist/lib/router-context.js");
-
-var _requestContext = __webpack_require__(/*! next-server/dist/lib/request-context */ "./node_modules/next-server/dist/lib/request-context.js");
 
 var _withRouter = _interopRequireDefault(__webpack_require__(/*! ./with-router */ "./node_modules/next/dist/client/with-router.js"));
 
@@ -5065,10 +5031,6 @@ exports["default"] = _default;
 
 function useRouter() {
   return _react["default"].useContext(_routerContext.RouterContext);
-}
-
-function useRequest() {
-  return _react["default"].useContext(_requestContext.RequestContext);
 } // INTERNAL APIS
 // -------------
 // (do not use following exports inside the app)

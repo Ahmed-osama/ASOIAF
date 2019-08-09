@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Card } from "./index";
 import { CharacterLink } from "../components/CharacterLink";
-const anonymous = `https://themerkle.com/wp-content/uploads/2017/02/shutterstock_153830195.jpg`;
+
 const CharName = styled.h4`
   font-size: 16px;
   text-align: center;
@@ -70,6 +70,6 @@ const CharacterCard = props => {
   );
 };
 CharacterCard.defaultProps = {
-  image: anonymous
+  image: "/static/character_placeholder.jpg"
 };
 export default CharacterCard;

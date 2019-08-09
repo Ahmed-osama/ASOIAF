@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Router from "next/router";
 import { Layout } from "../../components/Layout/Layout";
 import { getHouseCharacters, getHouseByName } from "../../client";
 
@@ -17,7 +18,6 @@ import CharacterCard from "../../elements/CharacterCard";
 import { Character } from "../../formatters/character";
 import { House as HouseClass } from "../../formatters/House";
 import Page from "../../types/page";
-import Router from "next/router";
 import { redirect } from "../../utils";
 
 interface HouseProps {
