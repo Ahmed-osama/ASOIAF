@@ -1,5 +1,5 @@
 import styled, { css, createGlobalStyle } from "styled-components";
-import { lighten } from "polished";
+import { lighten, backgrounds } from "polished";
 import theme from "./theme";
 export const GlobalStyle = createGlobalStyle`
  @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
@@ -21,6 +21,12 @@ export const GlobalStyle = createGlobalStyle`
     :hover{
       color:${props => props.theme.secondary};
     }
+  }
+  .ReactModal__Overlay{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: rgba(0,0,0,0.5) !important;
   }
 `;
 

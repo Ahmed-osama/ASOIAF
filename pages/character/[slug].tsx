@@ -7,6 +7,8 @@ import Router from "next/router";
 import Page from "../../types/page";
 import { Character } from "../../formatters/character";
 import { redirect } from "../../utils";
+import { useState } from "react";
+import StyledModal from "../../elements/StyledModal";
 
 const CharacterPage: Page<Character> = ({
   id,
@@ -27,19 +29,33 @@ const CharacterPage: Page<Character> = ({
   birth
 }) => {
   const subject = ["male", ""].some(gen => gen === gender) ? "he" : "she";
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Layout>
         <Row>
-          <Col cols={4}>{image && <img src={image} />}</Col>
+          <Col cols={4}>
+            {image && (
+              <>
+                <img src={image} onClick={setIsOpen.bind(null, true)} />
+                <StyledModal
+                  isOpen={isOpen}
+                  onRequestClose={setIsOpen.bind(null, false)}
+                  contentLabel={name}
+                >
+                  <img src={image} onClick={setIsOpen.bind(null, true)} />
+                </StyledModal>
+              </>
+            )}
+          </Col>
           <Col cols={8}>
             <PageSection>
               <PageTitle>
-                {titles[0]} {name} Of{" "}
-                <Link href="/house/[name]" as={`/house/${house}`}>
-                  <a>{house}</a>
-                </Link>
+                {titles[0]} {name}
               </PageTitle>
+              <Link href="/house/[name]" as={`/house/${house}`}>
+                <Label>{house}</Label>
+              </Link>
             </PageSection>
             <PageSection>
               {gender && (

@@ -23,7 +23,6 @@ const Home: Page<any> = ({ houses }) => (
 Home.getInitialProps = async ({ res }) => {
   try {
     const houses = await getAllHouses();
-
     return {
       houses
     };

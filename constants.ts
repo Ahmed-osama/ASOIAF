@@ -4,8 +4,8 @@ export const paths = [
     path: "/bastards"
   },
   {
-    name: "houses",
-    path: "/"
+    name: "Battels",
+    path: "/battels"
   }
 ];
 

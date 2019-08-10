@@ -56,3 +56,19 @@ export const getHouseCharacters = async function(name) {
   const formattedData = await data.map(char => new Character(char));
   return formattedData;
 };
+
+export const getAllBattels = async function() {
+  var url = apiUrl + "show/battles";
+  const res = await fetch(url);
+  const data = await res.json();
+  handleNoData(data);
+  return data;
+};
+export const getAllBattelBySlug = async function(slug) {
+  var url = apiUrl + "show/battles/bySlug/" + slug;
+  console.log(url);
+  const res = await fetch(url);
+  const data = await res.json();
+  handleNoData(data);
+  return data;
+};

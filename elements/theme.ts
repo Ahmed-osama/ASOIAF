@@ -9,6 +9,9 @@ export default {
     dark: `#262324`
   },
   space: 15,
+  get divider() {
+    return this.colors.divider;
+  },
   get primary() {
     return this.colors.dark;
   },

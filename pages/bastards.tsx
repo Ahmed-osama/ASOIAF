@@ -8,7 +8,7 @@ import Page from "../types/page";
 import CharacterCard from "../elements/CharacterCard";
 
 const CardUl = Card("ul");
-const Home: Page<any> = ({ bastards }) => (
+const Bastards: Page<any> = ({ bastards }) => (
   <Layout>
     <Row>
       {bastards.map(char => (
@@ -20,7 +20,7 @@ const Home: Page<any> = ({ bastards }) => (
   </Layout>
 );
 
-Home.getInitialProps = async ({ res }) => {
+Bastards.getInitialProps = async ({ res }) => {
   try {
     const bastards = await getAllBastards();
 
@@ -33,4 +33,4 @@ Home.getInitialProps = async ({ res }) => {
   }
 };
 
-export default Home;
+export default Bastards;
