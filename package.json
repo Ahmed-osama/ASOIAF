@@ -6,7 +6,7 @@
   "dependencies": {
     "collections": "^5.1.9",
     "isomorphic-unfetch": "^3.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "next": "^9.0.2",
     "now": "^15.8.7",
     "polished": "^3.4.1",
